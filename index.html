@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ODI Multiple User Chart</title>
+  <!-- Include dayjs library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+  <!-- Include echarts library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.2/echarts.min.js"></script>
+  <style>
+    #main {
+      width: 100%;
+      height: 90vh;
+      margin-left: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .button-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      margin-right: 20px;
+      font-family: "Arial", "Helvetica", "sans-serif";
+      font-size: 16px;
+      color: #333;
+    }
+
+    .button-group label {
+      font-family: "Arial", "Helvetica", "sans-serif";
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+    
+    .button-group select {
+      padding: 5px;
+      font-size: 14px;
+      font-family: "Arial", "Helvetica", "sans-serif";
+      color: #333;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s ease;
+    }
+
+    .button-group select:focus {
+      outline: none;
+      background-color: #e6e6e6;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-family: "Arial", "Helvetica", "sans-serif";
+      font-size: 16px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="button-group">
+      <label for="subjectSelector">Subjects: </label>
+      <select id="subjectSelector">
+        <option value="">--</option>
+        <option value=123>123</option>
+        <option value=125>125</option>
+        <option value=128>128</option>
+        <option value=130>130</option>
+        <option value=134>134</option>
+        <option value=136>136</option>
+        <option value=138>138</option>
+        <option value=140>140</option>
+        <option value=141>141</option>
+        <option value=142>142</option>
+        <option value=145>145</option>
+        <option value=146>146</option>
+        <option value=153>153</option>
+        <option value=10024>10024</option>
+        <option value=10026>10026</option>
+        <option value=10030>10030</option>
+        <option value=10034>10034</option>
+        <option value=10044>10044</option>
+        <option value=10046>10046</option>
+        <option value=10047>10047</option>
+        <option value=10048>10048</option>
+        <option value=10049>10049</option>
+        <option value=10052>10052</option>
+
+      </select>
+    </div>
+    <div>
+      <table>
+        <tr>
+          <th>User</th>
+          <td id="user1">ProSomnus ODI</td>
+          <td id="user2">ProSomnus Float ODI</td>
+          <td id="user3">Golden Standard ODI</td>
+          <td id="user4">SleepON ODI</td>
+          <td id="user5">Zephr ODI</td>
+        </tr>
+        <tr>
+          <th>OD Event</th>
+          <td id="odiCount1"></td>
+          <td id="odiCount2"></td>
+          <td id="odiCount3"></td>
+          <td id="odiCount4"></td>
+          <td id="odiCount5"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div id="main"></div>
+  <script src="main.js"></script>
+</body>
+</html>
