@@ -109,7 +109,10 @@ function extractOdiData(userData) {
       });
     });
   }
-  return odiData;
+  return {
+    odiData,
+    odiIndex: userData.odi_index,
+  };
 }
 
 async function loadAndDisplayData(date) {
@@ -255,24 +258,34 @@ async function loadAndDisplayData(date) {
       odiData.push(extractOdiData(usersData[i]));
     }
 
-    // Calculate the ODI count for each user
-    const odiCount = [];
-    for (let i = 0; i < odiData.length; i++) {
-      odiCount.push(odiData[i].length);
-    }
-
     // Update the content of the table cells with the ODI count values
     for (let i = 0; i < odiData.length; i++) {
-      const odiCount = odiData[i].length;
-      document.getElementById(`odiCount${i + 1}`).textContent =
-        odiCount.toString();
+      const odiCount = odiData[i].odiData ? odiData[i].odiData.length : 0;
+      const odiIndex = odiData[i].odiIndex ? odiData[i].odiIndex : 0;
+
+      if (odiCount === 0) {
+        document.getElementById(`odiCount${i + 1}`).textContent = "--";
+      } else {
+        document.getElementById(`odiCount${i + 1}`).textContent =
+          odiCount.toString();
+      }
+      if (odiIndex === 0) {
+        document.getElementById(`odi${i + 1}`).textContent = "--";
+      } else {
+        document.getElementById(`odi${i + 1}`).textContent =
+          odiIndex.toString();
+      }
     }
 
     // Prepare ODI markArea data with different colors for each user
     const odiMarkAreaData = [];
     for (let i = 0; i < odiData.length; i++) {
+      if (!odiData[i] || !odiData[i].odiData) {
+        console.log(`odiData[${i}] or odiData[${i}].odiData is undefined`);
+        continue;
+      }
       odiMarkAreaData.push(
-        odiData[i].map((odi) => [
+        odiData[i].odiData.map((odi) => [
           {
             xAxis: odi.startTime,
             itemStyle: {
