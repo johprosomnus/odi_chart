@@ -152,6 +152,7 @@ async function loadAndDisplayData(date) {
         let newDate = date; // Use let to allow reassignment
         const dateMapping = {
           example4: {
+            121: "2024-05-09",
             123: "2024-04-16",
             10044: "2024-04-17",
             130: "2024-04-18",
@@ -189,6 +190,7 @@ async function loadAndDisplayData(date) {
             134: "2024-04-04",
           },
           example3: {
+            121: "2024-04-24",
             123: "2024-04-01",
             10044: "2024-04-02",
             130: "2024-04-03",
