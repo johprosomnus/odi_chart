@@ -260,6 +260,13 @@ async function loadAndDisplayData(date) {
     // Extract time data for the x-axis
     const timeArr = extractTimeData(userWithLongestDuration);
 
+    // Display the duration
+    document.getElementById("duration").textContent = (
+      timeArr.length /
+      60 /
+      60
+    ).toFixed(2);
+
     // Extract ODI data
     const odiData = [];
     for (let i = 0; i < usersData.length; i++) {
@@ -290,21 +297,22 @@ async function loadAndDisplayData(date) {
     for (let i = 0; i < odiData.length; i++) {
       if (!odiData[i] || !odiData[i].odiData) {
         console.log(`odiData[${i}] or odiData[${i}].odiData is undefined`);
-        continue;
-      }
-      odiMarkAreaData.push(
-        odiData[i].odiData.map((odi) => [
-          {
-            xAxis: odi.startTime,
-            itemStyle: {
-              color: users[i].color,
+        odiMarkAreaData.push([]);
+      } else {
+        odiMarkAreaData.push(
+          odiData[i].odiData.map((odi) => [
+            {
+              xAxis: odi.startTime,
+              itemStyle: {
+                color: users[i].color,
+              },
             },
-          },
-          {
-            xAxis: odi.endTime,
-          },
-        ])
-      );
+            {
+              xAxis: odi.endTime,
+            },
+          ])
+        );
+      }
     }
 
     // Create an ECharts chart and render SpO2 data with ODI markArea
