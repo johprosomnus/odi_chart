@@ -119,12 +119,7 @@ async function loadAndDisplayData(date) {
   try {
     // Create users array
     const users = [
-      new User(
-        "example4",
-        "Ps123456",
-        "MVM",
-        "rgba(255, 173, 177, 0.3)"
-      ),
+      new User("example4", "Ps123456", "MVM", "rgba(255, 173, 177, 0.3)"),
       // new User(
       //   "example6",
       //   "Ps123456",
@@ -137,12 +132,7 @@ async function loadAndDisplayData(date) {
       //   "Golden Standard ODI",
       //   "rgba(173, 255, 177, 0.3)"
       // ),
-      new User(
-        "example3",
-        "Ps123456",
-        "SleepON",
-        "rgba(177, 173, 255, 0.3)"
-      ),
+      new User("example3", "Ps123456", "SleepON", "rgba(177, 173, 255, 0.3)"),
       // new User("example1", "Ps123456", "Zephr ODI", "rgba(8, 128, 60, 0.3)"),
     ];
 
