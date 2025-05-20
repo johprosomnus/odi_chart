@@ -2,154 +2,132 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ODI Multiple User Chart</title>
-    <!-- Include dayjs library -->
+    <title>SpO2 Comparison Chart</title>
+    <!-- dayjs for date formatting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
-    <!-- Include echarts library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.2/echarts.min.js"></script>
+    <!-- echarts for charting -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
     <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
       #main {
         width: 100%;
-        height: 90vh;
-        margin-left: 20px;
+        height: 80vh;
+        margin-top: 30px;
       }
 
       .container {
         display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
       }
 
-      .button-group {
+      .controls {
         display: flex;
+        flex-direction: row;
         align-items: center;
-        justify-content: center;
-        margin-top: 20px;
-        margin-right: 20px;
-        font-family: "Arial", "Helvetica", "sans-serif";
-        font-size: 16px;
-        color: #333;
+        flex-wrap: wrap;
+        gap: 10px;
       }
 
-      .button-group label {
-        font-family: "Arial", "Helvetica", "sans-serif";
-        padding: 10px;
-        font-size: 16px;
+      .controls label {
         font-weight: bold;
       }
 
-      .button-group select {
+      .controls select,
+      .controls input[type="date"],
+      .controls button {
         padding: 5px;
         font-size: 14px;
-        font-family: "Arial", "Helvetica", "sans-serif";
-        color: #333;
-        border: 1px solid #ccc;
-        background-color: #f9f9f9;
-        transition: background-color 0.3s ease;
       }
 
-      .button-group select:focus {
-        outline: none;
-        background-color: #e6e6e6;
+      .controls button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
       }
 
-      table {
-        border-collapse: collapse;
-        margin-top: 20px;
-        font-family: "Arial", "Helvetica", "sans-serif";
-        font-size: 16px;
-        margin-right: 20px;
+      .controls button:hover {
+        background-color: #0056b3;
       }
 
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-        font-size: 14px;
-      }
-
-      th {
-        background-color: #f2f2f2;
-        text-align: left;
+      .instructions {
+        margin-top: 10px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="button-group">
-        <label for="subjectSelector">Subjects: </label>
-        <select id="subjectSelector">
-          <option value="">--</option>
-          <option value="121">121</option>
-          <option value="123">123</option>
-          <option value="125">125</option>
-          <option value="128">128</option>
-          <option value="130">130</option>
-          <option value="134">134</option>
-          <option value="136">136</option>
-          <option value="138">138</option>
-          <option value="140">140</option>
-          <option value="141">141</option>
-          <option value="142">142</option>
-          <option value="145">145</option>
-          <option value="146">146</option>
-          <option value="153">153</option>
-          <option value="10024">10024</option>
-          <option value="10026">10026</option>
-          <option value="10028">10028</option>
-          <option value="10030">10030</option>
-          <option value="10034">10034</option>
-          <option value="10036">10036</option>
-          <option value="10044">10044</option>
-          <option value="10045">10045</option>
-          <option value="10046">10046</option>
-          <option value="10047">10047</option>
-          <option value="10048">10048</option>
-          <option value="10049">10049</option>
-          <option value="10052">10052</option>
+      <div class="controls">
+        <label for="userSelect">User:</label>
+        <select id="userSelect">
+          <option value="valid1">valid1</option>
+          <option value="valid2">valid2</option>
+          <option value="valid3">valid3</option>
+          <option value="valid4">valid4</option>
+          <option value="valid5">valid5</option>
+          <option value="valid6">valid6</option>
+          <option value="valid8">valid8</option>
+          <option value="valid9">valid9</option>
+          <option value="valid10">valid10</option>
+          <option value="valid11">valid11</option>
+          <option value="valid12">valid12</option>
+          <option value="valid13">valid13</option>
+          <option value="valid14">valid14</option>
+          <option value="valid15">valid15</option>
+          <option value="valid16">valid16</option>
+          <option value="valid17">valid17</option>
+          <option value="valid18">valid18</option>
+          <option value="valid19">valid19</option>
+          <option value="valid20">valid20</option>
+          <option value="valid21">valid21</option>
+          <option value="valid22">valid22</option>
+          <option value="valid23">valid23</option>
+          <option value="valid24">valid24</option>
+          <option value="valid25">valid25</option>
+          <option value="valid26">valid26</option>
+          <option value="valid27">valid27</option>
         </select>
+
+        <label for="dateA">Date A:</label>
+        <input type="date" id="dateA" />
+
+        <label for="dateB">Date B:</label>
+        <input type="date" id="dateB" />
+
+        <button id="compareBtn">Compare</button>
       </div>
-      <div>
-        <table>
-          <tr>
-            <th>User</th>
-            <td id="user1">MVM</td>
-            <td id="user2">SleepON</td>
-            <!-- <td id="user3">Golden Standard ODI</td> -->
-            <!-- <td id="user4">ProSomnus Float ODI</td> -->
-            <!-- <td id="user5">Zephr ODI</td> -->
-          </tr>
-          <tr>
-            <th>OD Event</th>
-            <td id="odiCount1"></td>
-            <td id="odiCount2"></td>
-            <!-- <td id="odiCount3"></td> -->
-            <!-- <td id="odiCount4"></td> -->
-            <!-- <td id="odiCount5"></td> -->
-          </tr>
-          <tr>
-            <th>ODI</th>
-            <td id="odi1"></td>
-            <td id="odi2"></td>
-            <!-- <td id="odi3"></td> -->
-            <!-- <td id="odi4"></td> -->
-            <!-- <td id="odi5"></td> -->
-          </tr>
-        </table>
-      </div>
-      <div>
-        <table>
-          <tr>
-            <th>Duration (hr)</th>
-            <td id="duration"></td>
-          </tr>
-        </table>
+
+      <div class="instructions">
+        <p><b>Instructions:</b> Select a user, two dates, and click "Compare" to see SpO2 and ODI events.</p>
       </div>
     </div>
+
     <div id="main"></div>
+
     <script src="main.js"></script>
+    <script>
+      document.getElementById("dateA").value = "2025-04-03";
+      document.getElementById("dateB").value = "2025-04-04";
+
+      document.getElementById("compareBtn").addEventListener("click", function () {
+        const dateA = document.getElementById("dateA").value;
+        const dateB = document.getElementById("dateB").value;
+        const user = document.getElementById("userSelect").value;
+        if (dateA && dateB) {
+          compareSingleUser(user, dateA, dateB);
+        } else {
+          alert("Please select both dates.");
+        }
+      });
+
+      // Initial chart on page load
+      compareSingleUser(document.getElementById("userSelect").value, yesterday, today);
+    </script>
   </body>
 </html>
