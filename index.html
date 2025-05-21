@@ -100,7 +100,32 @@
         <label for="dateB">Date B:</label>
         <input type="date" id="dateB" />
 
-        <button id="compareBtn">Compare</button>
+        <button id="compareBtn">Generate Chat</button>
+
+        <div id="odiInfoContainer" style="margin-top: 20px;">
+          <table id="odiInfoTable" border="1" cellpadding="8" style="border-collapse: collapse; width: auto;">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Date A</th>
+                <th>Date B</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>ODI Count</b></td>
+                <td id="odiCountA">-</td>
+                <td id="odiCountB">-</td>
+              </tr>
+              <tr>
+                <td><b>ODI Index</b></td>
+                <td id="odiIndexA">-</td>
+                <td id="odiIndexB">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
 
       <div class="instructions">
@@ -112,7 +137,7 @@
 
     <script src="main.js"></script>
     <script>
-      document.getElementById("dateA").value = "2025-04-03";
+      document.getElementById("dateA").value = "2025-04-06";
       document.getElementById("dateB").value = "2025-04-04";
 
       document.getElementById("compareBtn").addEventListener("click", function () {
@@ -126,8 +151,6 @@
         }
       });
 
-      // Initial chart on page load
-      compareSingleUser(document.getElementById("userSelect").value, yesterday, today);
     </script>
   </body>
 </html>

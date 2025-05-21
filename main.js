@@ -101,6 +101,10 @@ function extractOdiMarkArea(userData, color) {
   ]);
 }
 
+function extractOdiValues(userData) {
+
+}
+
 async function compareSingleUser(username, dateA, dateB) {
   const patientId = users[username];
   if (!patientId) {
@@ -115,6 +119,15 @@ async function compareSingleUser(username, dateA, dateB) {
 
     const spo2A = extractSpO2Data(dataA);
     const spo2B = extractSpO2Data(dataB);
+    const odiInfoA = {
+      count: dataA?.odi_count ?? 'N/A',
+      index: dataA?.odi_index ?? 'N/A'
+    };
+
+    const odiInfoB = {
+      count: dataB?.odi_count ?? 'N/A',
+      index: dataB?.odi_index ?? 'N/A'
+    };
     const timeArr = dataA ? extractTimeData(dataA) : [];
 
     // Use blue for Date A, gray for Date B
@@ -195,6 +208,12 @@ async function compareSingleUser(username, dateA, dateB) {
         },
       },
     });
+    // Set table values
+    document.getElementById("odiCountA").textContent = odiInfoA.count;
+    document.getElementById("odiCountB").textContent = odiInfoB.count;
+    document.getElementById("odiIndexA").textContent = odiInfoA.index;
+    document.getElementById("odiIndexB").textContent = odiInfoB.index;
+
   } catch (error) {
     alert("Failed to load or render chart data.");
     console.error("Error comparing user:", error);
